@@ -4,8 +4,7 @@ $(document).ready(function()  {
     if (event.which === 13) { // check the key was <enter>
       var input = $(this);
       var username = input.val();
-
-      console.log('username was: ', username);
+      showUser(getGithubInfo(username));
     }
   });
 });
@@ -27,8 +26,13 @@ function getGithubInfo(username) {
 function showUser(xmlhttp) {
   if (xmlhttp.status === 200) {
     // show the user details
-
+    var json = xmlhttp.responseText;
+    var user = JSON.parse(json);
+    $('#profile h2').text(user['login'] + ' is Github user #' + user['id']);
+    $('#profile .information').append('<div class=profile>' + user['html_url'] + '</div>');
+    $('#profile .avatar').append('<img src=\'' + user['avatar_url'] + '\' />');
   } else {
     // show an error
+    $('#profile h2').text('No such user!');
   }
 }
