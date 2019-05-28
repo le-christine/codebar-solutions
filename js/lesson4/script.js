@@ -14,6 +14,7 @@ function getGithubInfo(username) {
 
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.open('GET', url, false);
+
   xmlhttp.send();
 
 //  var data = xmlhttp.responseText;
